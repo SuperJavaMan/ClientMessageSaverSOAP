@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://www.messagesaver.com/messages" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.messagesaver.com/messages" targetNamespace="http://www.messagesaver.com/messages">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.messagesaver.com/messages">
+
+     <xs:element name="Message">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="author" type="xs:string"/>
+                 <xs:element name="body">
+                     <xs:simpleType>
+                         <xs:restriction base="xs:string">
+                             <xs:minLength value="1"/>
+                             <xs:maxLength value="200"/>
+                         </xs:restriction>
+                     </xs:simpleType>
+                 </xs:element>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllMessagesRequest">
+         <xs:complexType/>
+     </xs:element>
+
+     <xs:element name="GetAllMessagesResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element maxOccurs="unbounded" ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllAuthorMessagesRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="authorName" type="xs:string"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="GetAllAuthorMessagesResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element maxOccurs="unbounded" ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="AddMessageRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="AddMessageResponse">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element ref="tns:Message"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+     <xs:element name="DeleteMessagesByAuthorRequest">
+         <xs:complexType>
+             <xs:sequence>
+                 <xs:element name="authorName" type="xs:string"/>
+             </xs:sequence>
+         </xs:complexType>
+     </xs:element>
+
+ </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAllAuthorMessagesResponse">
+    <wsdl:part element="tns:GetAllAuthorMessagesResponse" name="GetAllAuthorMessagesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddMessageRequest">
+    <wsdl:part element="tns:AddMessageRequest" name="AddMessageRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteMessagesByAuthorRequest">
+    <wsdl:part element="tns:DeleteMessagesByAuthorRequest" name="DeleteMessagesByAuthorRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllAuthorMessagesRequest">
+    <wsdl:part element="tns:GetAllAuthorMessagesRequest" name="GetAllAuthorMessagesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="AddMessageResponse">
+    <wsdl:part element="tns:AddMessageResponse" name="AddMessageResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllMessagesRequest">
+    <wsdl:part element="tns:GetAllMessagesRequest" name="GetAllMessagesRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetAllMessagesResponse">
+    <wsdl:part element="tns:GetAllMessagesResponse" name="GetAllMessagesResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="MessageSaverPort">
+    <wsdl:operation name="GetAllAuthorMessages">
+      <wsdl:input message="tns:GetAllAuthorMessagesRequest" name="GetAllAuthorMessagesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllAuthorMessagesResponse" name="GetAllAuthorMessagesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMessage">
+      <wsdl:input message="tns:AddMessageRequest" name="AddMessageRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:AddMessageResponse" name="AddMessageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessagesByAuthor">
+      <wsdl:input message="tns:DeleteMessagesByAuthorRequest" name="DeleteMessagesByAuthorRequest">
+    </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMessages">
+      <wsdl:input message="tns:GetAllMessagesRequest" name="GetAllMessagesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:GetAllMessagesResponse" name="GetAllMessagesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MessageSaverPortSoap11" type="tns:MessageSaverPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetAllAuthorMessages">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllAuthorMessagesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllAuthorMessagesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddMessage">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="AddMessageRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="AddMessageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMessagesByAuthor">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="DeleteMessagesByAuthorRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllMessages">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="GetAllMessagesRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetAllMessagesResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MessageSaverPortService">
+    <wsdl:port binding="tns:MessageSaverPortSoap11" name="MessageSaverPortSoap11">
+      <soap:address location="http://localhost:8080/messages/details"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
